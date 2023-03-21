@@ -1,0 +1,7 @@
+F:\23-03-10\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.csproj.AssemblyReference.cache
+F:\23-03-10\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.csproj.CoreCompileInputs.cache
+F:\23-03-10\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe.config
+F:\23-03-10\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.exe
+F:\23-03-10\ConsoleApp2\ConsoleApp2\bin\Debug\ConsoleApp2.pdb
+F:\23-03-10\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.exe
+F:\23-03-10\ConsoleApp2\ConsoleApp2\obj\Debug\ConsoleApp2.pdb
