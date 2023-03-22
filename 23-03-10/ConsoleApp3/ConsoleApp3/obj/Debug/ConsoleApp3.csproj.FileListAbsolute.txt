@@ -1,7 +1,0 @@
-F:\23-03-10\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe.config
-F:\23-03-10\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.exe
-F:\23-03-10\ConsoleApp3\ConsoleApp3\bin\Debug\ConsoleApp3.pdb
-F:\23-03-10\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.csproj.AssemblyReference.cache
-F:\23-03-10\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.csproj.CoreCompileInputs.cache
-F:\23-03-10\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.exe
-F:\23-03-10\ConsoleApp3\ConsoleApp3\obj\Debug\ConsoleApp3.pdb
