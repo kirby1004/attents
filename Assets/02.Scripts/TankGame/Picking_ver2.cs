@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+//
 public class Picking_ver2 : MonoBehaviour
-{ 
-    //Vector3 click;
+{
+    //public clickact clickaction = null;
+    //public UnityAction<Vector3> clickAtcion = null;
     public float moveSpeed = 5.0f;
     Coroutine myCoFunc;
-    Coroutine RotateFunc;
-    public Transform headTr;
-    public Transform cannonTr;
-    public Transform muzzleTr;
     public float RotateSpeed = 60.0f;
     public float Velocity = 2.0f;
     public LayerMask PickMask;
@@ -31,17 +30,17 @@ public class Picking_ver2 : MonoBehaviour
                 //if (hit.transform.gameObject.layer == LayerMask.NameToLayer("ground"))
                 if (((1<< transform.gameObject.layer)& enemyMask) == 0)
                 {
-                    //transform.position = Vector3.MoveTowards(transform.position, hit.point, moveSpeed * Time.deltaTime);
+                    //clickAtcion?.Invoke(hit.point);
                     StopAllCoroutines();
                     targetPos = transform.position;
                     targetRot = transform.rotation.eulerAngles;
-                    myCoFunc = StartCoroutine(MovingToPos(hit.point));
+                    //StartCoroutine(MovingToPos(hit.point));
                 }
 
             }
         }
-        transform.position = Vector3.Lerp(transform.position, targetPos, 2.0f * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRot), 10.0f*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPos, Velocity * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetRot),RotateSpeed*Time.deltaTime);
     }
     Vector3 targetPos;
     IEnumerator MovingToPos(Vector3 pos)
@@ -52,7 +51,10 @@ public class Picking_ver2 : MonoBehaviour
         Vector3 dir = pos - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
+        if (dist > 0.0f)
+        {
 
+        }
         //float d = Vector3.Dot(transform.forward, dir);
         //float r = Mathf.Acos(d);
 
@@ -61,7 +63,7 @@ public class Picking_ver2 : MonoBehaviour
 
         //if( Vector3.Dot(transform.right,dir)< 0.0f){
         // }
-        RotateFunc =StartCoroutine(Roatation(dir));
+        yield return StartCoroutine(Roatation(dir));
 
         while (dist>0.0f)
         {
@@ -70,19 +72,17 @@ public class Picking_ver2 : MonoBehaviour
             {
                 delta = dist;
             }
-
-            //transform.Translate(dir * delta, Space.World);
             targetPos += dir * delta;
             //transform.position = Vector3.Lerp(transform.position, targetPos, Velocity * Time.deltaTime);
             dist -= delta;
 
             yield return null;
         }
+
     }
     Vector3 targetRot;
     IEnumerator Roatation(Vector3 dir)
     {
-
         float d = Vector3.Dot(transform.forward, dir);
         float r = Mathf.Acos(d);
         float angle = r * Mathf.Rad2Deg;
@@ -91,8 +91,6 @@ public class Picking_ver2 : MonoBehaviour
         {
             retdir = -1.0f;
         }
-
-
         while (angle >0.0f)
         {
             float delta = 360.0f* Time.deltaTime;
@@ -104,9 +102,10 @@ public class Picking_ver2 : MonoBehaviour
             targetRot.y += retdir * delta;
             angle -= delta;
             yield return null;
-
         }
-
-
     }
+
+
+
+
 }
