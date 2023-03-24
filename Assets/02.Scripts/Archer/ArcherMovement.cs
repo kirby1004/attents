@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArcherMovement : ArcherProperty
@@ -15,20 +16,23 @@ public class ArcherMovement : ArcherProperty
         float dist = dir.magnitude;
         dir.Normalize();
 
-        yield return ArcherRotating(dir);
-        myArcher.SetBool("Ismoving", true);
+        yield return StartCoroutine(ArcherRotating(dir));
+        myArcher.SetBool("IsMoving", true);
         while (dist > 0.0f)
         {
-            float delta = ArcherSpeed * Time.deltaTime;
-            if(dist - delta < 0.0f)
+            if (!myArcher.GetBool("isAttacking"))
             {
-                delta = dist;
+                float delta = ArcherSpeed * Time.deltaTime;
+                if (dist - delta < 0.0f)
+                {
+                    delta = dist;
+                }
+                dist -= delta;
+                transform.Translate(dir * delta, Space.World);
             }
-            dist -= delta;
-            transform.Translate(dir * delta);
             yield return null;
         }
-        myArcher.SetBool("Ismoving", false);
+        myArcher.SetBool("IsMoving", false);
     }
 
     IEnumerator ArcherRotating(Vector3 dir)
@@ -41,21 +45,34 @@ public class ArcherMovement : ArcherProperty
         }
         while (angle > 0.0f)
         {
-            float delta = ArcherRotate * Time.deltaTime;
-            if(angle - delta < 0.0f)
+            float delta = Time.deltaTime * ArcherRotate;
+            if (angle - delta < 0.0f)
             {
-                delta = angle;
+                angle = delta;
             }
             angle -= delta;
-            transform.Rotate(Vector3.up * angle * rotDir);
+            transform.Rotate(Vector3.up * rotDir * delta);
             yield return null;
         }
     }
 
-    IEnumerator ArcherAttack(Vector3 pos)
-    {
 
+    //protected void ArcherAttacking(Vector3 pos)
+    //{
+    //    StopAllCoroutines();
+    //    StartCoroutine(ArcherAttackStart(pos));
+    //}
 
-        yield return null;
-    }
+    //IEnumerator ArcherAttackStart(Vector3 pos)
+    //{
+    //    //myArcher.SetTrigger("Skill");
+    //    yield return null;
+    //}
+
+    //IEnumerator ArcherAttackEnd(Vector3 pos)
+    //{
+
+    //    yield return null;
+    //}
+
 }

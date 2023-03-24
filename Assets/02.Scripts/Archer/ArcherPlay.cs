@@ -13,11 +13,22 @@ public class ArcherPlay : ArcherMovement
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            myArcher.SetTrigger("Attack");
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            myArcher.SetTrigger("Skill");
+        }
     }
 
-    public void OnMove(Vector3 pos)
+    public void ArcherOnMove(Vector3 pos)
     {
         ArcherMovingToPos(pos);
+    }
+    public void ArcherOnAttack(Vector3 pos)
+    {
+
     }
 }

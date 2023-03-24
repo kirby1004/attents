@@ -1,35 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterMovement : CharacterProperty
 {
-    protected void MoveToPos(Vector3 pos)
+    protected void MoveToPos(Vector3 pos, UnityAction done = null)
     {
         StopAllCoroutines();
-        StartCoroutine(MovingToPos(pos));
+        StartCoroutine(MovingToPos(pos,done));
     }
 
-   IEnumerator MovingToPos(Vector3 pos)
+   IEnumerator MovingToPos(Vector3 pos, UnityAction done)
     {
         Vector3 dir = pos - transform.position;
         float dist = dir.magnitude;
         dir.Normalize();
         yield return StartCoroutine(Rotating(dir));
 
-        myAnim.SetBool("Ismoving",true);
+        myAnim.SetBool("IsMoving", true);
         while (dist > 0.0f)
         {
-            float delta = Time.deltaTime * moveSpeed;
-            if( dist - delta < 0.0f)
+            if (!myAnim.GetBool("isAttacking"))
             {
-                delta = dist;
+                float delta = Time.deltaTime * moveSpeed;
+                if (dist - delta < 0.0f)
+                {
+                    delta = dist;
+                }
+                dist -= delta;
+                transform.Translate(dir * delta, Space.World);
             }
-            dist -= delta;
-            transform.Translate(dir * delta,Space.World);
             yield return null;
+        
         }
-        myAnim.SetBool("Ismoving", false);
+        myAnim.SetBool("IsMoving", false);
+        done?.Invoke(); 
     }
 
     IEnumerator Rotating(Vector3 dir)

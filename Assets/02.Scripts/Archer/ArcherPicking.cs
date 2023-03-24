@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public delegate void ClickAct(Vector3 pos);
+
 public class ArcherPicking : MonoBehaviour
 {
     public LayerMask PickMask;
     public LayerMask enemyMask;
-    public UnityEvent<Vector3> ArcherClickAtcion = null;
-
+    public LayerMask GroundMask;
+    public UnityEvent<Vector3> ArcherClickAction = null;
+    //public UnityEvent<Vector3> ArcherAttackAction = null;
 
     void Start()
     {
@@ -24,11 +26,19 @@ public class ArcherPicking : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 1000, PickMask))
             {
-                if (((1 << transform.gameObject.layer) & enemyMask) == 0)
+                if (((1 << transform.gameObject.layer) & GroundMask) == 0)
                 {
-                    ArcherClickAtcion?.Invoke(hit.point);
+                    ArcherClickAction?.Invoke(hit.point);
                 }
             }
+            //else if (Physics.Raycast(ray, out RaycastHit enemy, 1000, enemyMask))
+            //{
+            //    if (((1 << transform.gameObject.layer) & enemyMask) == 0)
+            //    {
+            //        ArcherAttackAction?.Invoke(hit.point);
+            //    }
+            //}
+
         }
 
     }
