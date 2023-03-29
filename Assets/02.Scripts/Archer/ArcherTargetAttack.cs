@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class ArcherTargetAttack : ArcherProperty
 {
-    // Start is called before the first frame update
-    void Start()
+    public void ToTargetRotate(Vector3 pos)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StopAllCoroutines();
+        StartCoroutine(TargetingRotating(pos));
     }
 
     IEnumerator TargetingRotating(Vector3 dir)

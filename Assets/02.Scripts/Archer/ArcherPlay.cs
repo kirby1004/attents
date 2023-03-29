@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherPlay : ArcherMovement
+public class ArcherPlay : ArcherMovement //,IBattle
 {
     // Start is called before the first frame update
     void Start()
@@ -31,4 +31,8 @@ public class ArcherPlay : ArcherMovement
     {
 
     }
+    //public void OnDamage()
+    //{
+        
+    //}
 }

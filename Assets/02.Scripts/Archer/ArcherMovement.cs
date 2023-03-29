@@ -57,22 +57,22 @@ public class ArcherMovement : ArcherProperty
     }
 
 
-    //protected void ArcherAttacking(Vector3 pos)
-    //{
-    //    StopAllCoroutines();
-    //    StartCoroutine(ArcherAttackStart(pos));
-    //}
+    protected void ArcherAttacking(Vector3 pos)
+    {
+        StopAllCoroutines();
+        StartCoroutine(ArcherAttackStart(pos));
+    }
 
-    //IEnumerator ArcherAttackStart(Vector3 pos)
-    //{
-    //    //myArcher.SetTrigger("Skill");
-    //    yield return null;
-    //}
+    IEnumerator ArcherAttackStart(Vector3 pos)
+    {
+        myArcher.SetTrigger("Skill");
+        yield return null;
+    }
 
-    //IEnumerator ArcherAttackEnd(Vector3 pos)
-    //{
+    IEnumerator ArcherAttackEnd(Vector3 pos)
+    {
 
-    //    yield return null;
-    //}
+        yield return null;
+    }
 
 }
